@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fit_life/core/theme.dart';
 import 'package:fit_life/features/login_page.dart';
+import 'package:fit_life/features/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
