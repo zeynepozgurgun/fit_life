@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart'; // LoginPage'i import ediyoruz
+import 'package:fit_life/core/theme.dart';
+import 'package:fit_life/features/login_page.dart';
+import 'package:fit_life/features/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
