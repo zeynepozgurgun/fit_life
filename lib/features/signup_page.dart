@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fit_life/features/login_page.dart'; //Çıkar
+import 'package:fit_life/login_page.dart';
 
 class SignupPage extends StatelessWidget {
   @override
@@ -18,10 +18,6 @@ class SignupPage extends StatelessWidget {
           ),
         ),
       ),
-
-
-
-
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0), 
@@ -65,6 +61,7 @@ class SignupPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
+                  obscureText: true,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12.0),
@@ -72,16 +69,14 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height:20),
+              SizedBox(height: 20),
               ElevatedButton(
-                // DEĞİŞTİRİLECEK
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 }, 
-                // 
                 child: Text('Create Account'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorScheme.onSecondary,

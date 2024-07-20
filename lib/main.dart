@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fit_life/core/theme.dart';
-import 'package:fit_life/features/login_page.dart';
-import 'package:fit_life/features/signup_page.dart';
+import 'package:fit_life/login_page.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FitLife',
-      theme: appTheme,
-      home: LoginPage(),
+      title: 'Fitlife',
+      theme:appTheme,
+      home: const LoginPage(), // Ana sayfa olarak LoginPage'i kullanıyoruz
+      debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
     );
   }
 }
