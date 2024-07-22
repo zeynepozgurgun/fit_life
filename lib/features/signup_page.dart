@@ -66,7 +66,7 @@ class SignupPage extends StatelessWidget {
                 ),
                 child: TextField(
                   style: Theme.of(context).textTheme.headlineSmall,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(12.0),
                     border: InputBorder.none,
                   ),
