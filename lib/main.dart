@@ -1,22 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:fit_life/core/theme.dart';
-import 'package:fit_life/features/login_page.dart';
-import 'package:fit_life/features/signup_page.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:fit_life/core/theme.dart'; // appTheme'i import ediyoruz
+import 'login_page.dart'; // LoginPage'i import ediyoruz
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FitLife',
-      theme: appTheme,
-      home: LoginPage(),
+      title: 'Fitlife',
+      theme: appTheme, // Özel temamızı burada kullanıyoruz
+      home: const LoginPage(), // Ana sayfa olarak LoginPage'i kullanıyoruz
+      debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
     );
   }
 }
-
