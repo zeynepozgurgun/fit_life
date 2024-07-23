@@ -5,6 +5,8 @@ import 'features/login_page.dart'; // LoginPage'i import ediyoruz
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'features/my_account.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitlife',
       theme: appTheme, // Özel temamızı burada kullanıyoruz
-      home: const LoginPage(), // Ana sayfa olarak LoginPage'i kullanıyoruz
+      home: const MyAccount(), // Ana sayfa olarak LoginPage'i kullanıyoruz
       debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
     );
   }
