@@ -97,7 +97,7 @@ class _MyAccountState extends State<MyAccount> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  buildInputFieldRow(context, 'Goal:', DropdownButtonFormField<String>(
+                  InputFieldRow(label: 'Goal:', child: DropdownButtonFormField<String>(
                     decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -117,7 +117,7 @@ class _MyAccountState extends State<MyAccount> {
 
                   const SizedBox(height: 10),
 
-                  buildInputFieldRow(context, 'Age:', TextField(
+                  InputFieldRow( label: 'Age:', child: TextField(
                     
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -131,7 +131,7 @@ class _MyAccountState extends State<MyAccount> {
 
                   const SizedBox(height: 10),
 
-                  buildInputFieldRow(context, 'Height:', TextField(
+                  InputFieldRow(label: 'Height:', child: TextField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,
@@ -144,7 +144,7 @@ class _MyAccountState extends State<MyAccount> {
 
                   const SizedBox(height: 10),
 
-                  buildInputFieldRow(context, 'Weight:', TextField(
+                  InputFieldRow(label: 'Weight:', child: TextField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       filled: true,
@@ -157,7 +157,7 @@ class _MyAccountState extends State<MyAccount> {
 
                   const SizedBox(height: 10),
 
-                  buildInputFieldRow(context, 'See diets for:', DropdownButtonFormField<String>(
+                  InputFieldRow(label: 'See diets for:', child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -176,7 +176,7 @@ class _MyAccountState extends State<MyAccount> {
 
                   const SizedBox(height: 10),
 
-                  buildInputFieldRow(context, 'Preferences:', DropdownButtonFormField<String>(
+                  InputFieldRow(label: 'Preferences:', child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -218,8 +218,20 @@ class _MyAccountState extends State<MyAccount> {
       bottomNavigationBar: BottomNavBar(),
     );
   }
+  
+}
 
-  Widget buildInputFieldRow(BuildContext context, String label, Widget inputField) {
+class InputFieldRow extends StatelessWidget {
+  const InputFieldRow({
+    super.key,
+    required this.label,
+    required this.child,
+  });
+  final String label;
+  final Widget child; 
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -232,8 +244,8 @@ class _MyAccountState extends State<MyAccount> {
               textAlign: TextAlign.left, 
             ),
           ),
-          SizedBox(width: 200, child: inputField),
-
+          SizedBox(width: 200, child: child),
+      
         ],
       ),
     );

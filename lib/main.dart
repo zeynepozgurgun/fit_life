@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitlife',
       theme: appTheme, // Özel temamızı burada kullanıyoruz
-      home: const LoginPage(), // Ana sayfa olarak LoginPage'i kullanıyoruz
+      home: const MyAccount(), // Ana sayfa olarak LoginPage'i kullanıyoruz
       debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
     );
   }
