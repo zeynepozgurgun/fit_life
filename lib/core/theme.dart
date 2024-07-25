@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const ColorScheme _colors =  ColorScheme(
+const ColorScheme _colors = const ColorScheme(
   primary: const Color(0xFFf1f7d7),
   onPrimary: const Color(0xFFfbe3a3),
   secondary: const Color(0xFF206380),
