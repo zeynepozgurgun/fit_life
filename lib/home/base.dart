@@ -17,9 +17,9 @@ class _BaseScreenState extends State<BaseScreen> { //it ties this state to the B
   final PageController _pageController = PageController();
 
   final List<Widget> _screens = [
+    MyAccount(),
     BrowseScreen(),
     SettingsScreen(),
-    MyAccount(),
   ];
 
   void _onTabTapped(int index) {
