@@ -13,9 +13,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< Updated upstream
       title: 'FitLife',
       theme: appTheme,
       home: LoginPage(),
+=======
+      title: 'Fitlife',
+      theme: appTheme, // Özel temamızı burada kullanıyoruz
+      home: const LoginPage(), // Ana sayfa olarak LoginPage'i kullanıyoruz
+      debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
+>>>>>>> Stashed changes
     );
   }
 }
