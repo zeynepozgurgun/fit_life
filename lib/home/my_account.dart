@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'navigation_bar.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -215,7 +214,6 @@ class _MyAccountState extends State<MyAccount> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
   
