@@ -1,0 +1,363 @@
+[
+  {
+      "title": "Keto Diet",
+      "imageUrl": "https://example.com/keto-diet.jpg",
+      "description": "The Keto diet is a low-carb, high-fat diet that aims to put the body into a state of ketosis, where it burns fat for fuel instead of carbohydrates. It involves significantly reducing carbohydrate intake and increasing fat consumption.",
+      "whatToEat": [
+        "Meat",
+        "Fatty fish",
+        "Eggs",
+        "Dairy products",
+        "Nuts and seeds",
+        "Low-carb vegetables",
+        "Avocados"
+      ],
+      "whatToAvoid": [
+        "Sugary foods",
+        "Bread and pasta",
+        "Starchy vegetables (potatoes, corn)",
+        "Fruits (except small portions of berries)",
+        "Legumes"
+      ],
+      "whoShouldAvoid": [
+        "People with certain liver conditions",
+        "Individuals with pancreatic conditions",
+        "Those with certain metabolic disorders"
+      ]
+    },
+    {
+    "title": "Mediterranean Diet",
+    "imageUrl": "https://example.com/mediterranean-diet.jpg",
+    "description": "The Mediterranean diet emphasizes fruits, vegetables, whole grains, nuts, and seeds, along with healthy fats from olive oil and fish.",
+    "whatToEat": [
+      "Fruits",
+      "Vegetables",
+      "Whole grains",
+      "Nuts",
+      "Olive oil",
+      "Fish"
+    ],
+    "whatToAvoid": [
+      "Processed foods",
+      "Sugary drinks",
+      "Red meat"
+    ],
+    "whoShouldAvoid": [
+      "Individuals with seafood allergies",
+      "People with certain heart conditions"
+    ]
+  },
+  {
+    "title": "Paleo Diet",
+    "imageUrl": "https://example.com/paleo-diet.jpg",
+    "description": "The Paleo diet focuses on consuming foods that would have been available to our ancestors, including meat, fish, fruits, vegetables, nuts, and seeds.",
+    "whatToEat": [
+      "Meat",
+      "Fish",
+      "Fruits",
+      "Vegetables",
+      "Nuts",
+      "Seeds"
+    ],
+    "whatToAvoid": [
+      "Grains",
+      "Dairy",
+      "Processed foods",
+      "Sugar"
+    ],
+    "whoShouldAvoid": [
+      "People with certain autoimmune conditions",
+      "Individuals with low calcium levels"
+    ]
+  },
+  {
+    "title": "Vegan Diet",
+    "imageUrl": "https://example.com/vegan-diet.jpg",
+    "description": "The Vegan diet excludes all animal products, focusing on plant-based foods including fruits, vegetables, grains, nuts, and seeds.",
+    "whatToEat": [
+      "Fruits",
+      "Vegetables",
+      "Legumes",
+      "Whole grains",
+      "Nuts",
+      "Seeds"
+    ],
+    "whatToAvoid": [
+      "Meat",
+      "Dairy",
+      "Eggs",
+      "Honey"
+    ],
+    "whoShouldAvoid": [
+      "Individuals with specific nutritional deficiencies",
+      "People with certain digestive issues"
+    ]
+  },
+  {
+    "title": "Mediterranean Dash Diet",
+    "imageUrl": "https://example.com/mediterranean-dash-diet.jpg",
+    "description": "The Mediterranean Dash Diet combines elements of the Mediterranean diet with the principles of the DASH (Dietary Approaches to Stop Hypertension) diet to manage blood pressure.",
+    "whatToEat": [
+      "Whole grains",
+      "Lean protein",
+      "Fruits",
+      "Vegetables",
+      "Low-fat dairy"
+    ],
+    "whatToAvoid": [
+      "High-sodium foods",
+      "Red meat",
+      "Sugary snacks"
+    ],
+    "whoShouldAvoid": [
+      "People with high sodium sensitivity",
+      "Individuals with chronic kidney disease"
+    ]
+  },
+  {
+    "title": "Whole30 Diet",
+    "imageUrl": "https://example.com/whole30-diet.jpg",
+    "description": "The Whole30 diet is a 30-day program focusing on eating whole, unprocessed foods and eliminating sugar, alcohol, grains, legumes, and dairy.",
+    "whatToEat": [
+      "Meat",
+      "Seafood",
+      "Vegetables",
+      "Fruits",
+      "Nuts",
+      "Seeds"
+    ],
+    "whatToAvoid": [
+      "Sugar",
+      "Alcohol",
+      "Grains",
+      "Legumes",
+      "Dairy"
+    ],
+    "whoShouldAvoid": [
+      "People with certain metabolic conditions",
+      "Individuals with food sensitivities"
+    ]
+  },
+  {
+      "title": "DASH Diet",
+      "imageUrl": "https://example.com/dash-diet.jpg",
+      "description": "The DASH diet (Dietary Approaches to Stop Hypertension) focuses on reducing blood pressure through a balanced diet rich in fruits, vegetables, whole grains, and low-fat dairy while limiting sodium, saturated fats, and cholesterol.",
+      "whatToEat": [
+        "Fruits",
+        "Vegetables",
+        "Whole grains",
+        "Lean proteins",
+        "Low-fat dairy"
+      ],
+      "whatToAvoid": [
+        "High sodium foods",
+        "Sugary beverages",
+        "Red meat",
+        "Processed snacks"
+      ],
+      "whoShouldAvoid": [
+        "Individuals with severe sodium restrictions",
+        "Those with certain kidney conditions"
+      ]
+    },
+    {
+      "title": "Flexitarian Diet",
+      "imageUrl": "https://example.com/flexitarian-diet.jpg",
+      "description": "The Flexitarian diet is a flexible vegetarian diet that emphasizes plant-based foods but allows for occasional meat and fish consumption. It focuses on improving overall health and reducing the environmental impact of meat consumption.",
+      "whatToEat": [
+        "Fruits",
+        "Vegetables",
+        "Whole grains",
+        "Legumes",
+        "Nuts",
+        "Seeds",
+        "Occasional meat and fish"
+      ],
+      "whatToAvoid": [
+        "Highly processed foods",
+        "Excessive red meat",
+        "Sugary foods"
+      ],
+      "whoShouldAvoid": [
+        "People with severe food allergies",
+        "Those needing high protein intake"
+      ]
+    },
+    {
+      "title": "Raw Food Diet",
+      "imageUrl": "https://example.com/raw-food-diet.jpg",
+      "description": "The Raw Food diet consists of unprocessed, uncooked, and often organic foods, including fruits, vegetables, nuts, seeds, and sprouted grains. It is believed to help with detoxification and improve overall health.",
+      "whatToEat": [
+        "Fruits",
+        "Vegetables",
+        "Nuts",
+        "Seeds",
+        "Sprouted grains"
+      ],
+      "whatToAvoid": [
+        "Cooked foods",
+        "Processed foods",
+        "Animal products"
+      ],
+      "whoShouldAvoid": [
+        "Individuals with certain digestive issues",
+        "People needing a higher calorie intake"
+      ]
+    },
+    {
+      "title": "Whole Foods Plant-Based Diet",
+      "imageUrl": "https://example.com/whole-foods-plant-based-diet.jpg",
+      "description": "The Whole Foods Plant-Based diet focuses on consuming whole, unprocessed plant foods. It excludes animal products, processed foods, and refined sugars, aiming to improve health and prevent chronic diseases.",
+      "whatToEat": [
+        "Whole grains",
+        "Legumes",
+        "Fruits",
+        "Vegetables",
+        "Nuts",
+        "Seeds"
+      ],
+      "whatToAvoid": [
+        "Refined sugars",
+        "Processed foods",
+        "Animal products"
+      ],
+      "whoShouldAvoid": [
+        "People with specific nutritional deficiencies",
+        "Individuals with certain medical conditions"
+      ]
+    },
+    {
+      "title": "Anti-Inflammatory Diet",
+      "imageUrl": "https://example.com/anti-inflammatory-diet.jpg",
+      "description": "The Anti-Inflammatory diet focuses on reducing inflammation in the body by consuming foods with anti-inflammatory properties and avoiding those that may trigger inflammation. It aims to improve overall health and manage chronic conditions.",
+      "whatToEat": [
+        "Berries",
+        "Leafy greens",
+        "Fatty fish",
+        "Nuts",
+        "Olive oil",
+        "Turmeric"
+      ],
+      "whatToAvoid": [
+        "Refined carbohydrates",
+        "Sugary foods",
+        "Processed meats",
+        "Excessive alcohol"
+      ],
+      "whoShouldAvoid": [
+        "Individuals with certain inflammatory conditions",
+        "People with food sensitivities"
+      ]
+    },
+    
+      {
+        "title": "Atkins Diet",
+        "imageUrl": "https://example.com/atkins-diet.jpg",
+        "description": "The Atkins Diet is a low-carb diet that emphasizes protein and fat consumption while reducing carbohydrate intake. It is designed to help with weight loss and improve overall health.",
+        "whatToEat": [
+          "Meat",
+          "Poultry",
+          "Fish",
+          "Eggs",
+          "Cheese",
+          "Low-carb vegetables (spinach, broccoli)"
+        ],
+        "whatToAvoid": [
+          "Sugary foods",
+          "Bread",
+          "Pasta",
+          "Starchy vegetables",
+          "High-carb fruits"
+        ],
+        "whoShouldAvoid": [
+          "People with certain kidney issues",
+          "Individuals with gout"
+        ]
+      },
+      {
+        "title": "South Beach Diet",
+        "imageUrl": "https://example.com/south-beach-diet.jpg",
+        "description": "The South Beach Diet is a low-carb diet that emphasizes lean proteins, healthy fats, and high-fiber carbohydrates. It aims to promote weight loss and heart health.",
+        "whatToEat": [
+          "Lean meats",
+          "Seafood",
+          "Eggs",
+          "Whole grains",
+          "Vegetables",
+          "Legumes"
+        ],
+        "whatToAvoid": [
+          "Refined carbohydrates",
+          "High-sugar foods",
+          "Saturated fats"
+        ],
+        "whoShouldAvoid": [
+          "Individuals with certain cholesterol conditions",
+          "People with specific carbohydrate metabolism issues"
+        ]
+      },
+      {
+        "title": "Zone Diet",
+        "imageUrl": "https://example.com/zone-diet.jpg",
+        "description": "The Zone Diet focuses on balancing macronutrients (proteins, carbohydrates, and fats) in a 40:30:30 ratio to stabilize blood sugar levels and promote weight loss.",
+        "whatToEat": [
+          "Lean proteins",
+          "Healthy fats",
+          "Low-glycemic carbohydrates",
+          "Vegetables",
+          "Fruits (in moderation)"
+        ],
+        "whatToAvoid": [
+          "High-glycemic foods",
+          "Excessive sugars",
+          "Processed snacks"
+        ],
+        "whoShouldAvoid": [
+          "People with insulin resistance",
+          "Individuals with specific metabolic disorders"
+        ]
+      },
+      {
+        "title": "Alkaline Diet",
+        "imageUrl": "https://example.com/alkaline-diet.jpg",
+        "description": "The Alkaline Diet focuses on consuming foods that are believed to help maintain the body's pH balance by emphasizing alkaline-forming foods and reducing acid-forming foods.",
+        "whatToEat": [
+          "Fruits (especially citrus fruits)",
+          "Vegetables",
+          "Nuts",
+          "Seeds",
+          "Alkaline water"
+        ],
+        "whatToAvoid": [
+          "Processed meats",
+          "Dairy products",
+          "Refined sugars",
+          "Grains (in excess)"
+        ],
+        "whoShouldAvoid": [
+          "Individuals with kidney issues",
+          "People with specific digestive conditions"
+        ]
+      },
+      {
+        "title": "FODMAP Diet",
+        "imageUrl": "https://example.com/fodmap-diet.jpg",
+        "description": "The FODMAP Diet is designed to help manage symptoms of irritable bowel syndrome (IBS) and other digestive disorders by reducing the intake of fermentable carbohydrates known as FODMAPs.",
+        "whatToEat": [
+          "Low-FODMAP fruits (strawberries, blueberries)",
+          "Vegetables (carrots, bell peppers)",
+          "Lean proteins",
+          "Rice",
+          "Oats"
+        ],
+        "whatToAvoid": [
+          "High-FODMAP foods (onions, garlic)",
+          "Certain dairy products",
+          "Certain legumes"
+        ],
+        "whoShouldAvoid": [
+          "People with IBS or similar digestive issues",
+          "Individuals with specific food sensitivities"
+        ]
+      }
+]

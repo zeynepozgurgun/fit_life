@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) { //
     return MaterialApp(
       title: 'Fitlife',
-      theme: appTheme, // Özel temamızı burada kullanıyoruz
-      home: BaseScreen(), // Ana sayfa olarak LoginPage'i kullanıyoruz
-      debugShowCheckedModeBanner: false, // Debug etiketini kaldırıyoruz
+      theme: appTheme, 
+      home: BaseScreen(), 
+      //debugShowCheckedModeBanner: false, 
     );
   }
 }
