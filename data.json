@@ -1,7 +1,8 @@
 [
   {
+    "id": "1",
       "title": "Keto Diet",
-      "imageUrl": "https://example.com/keto-diet.jpg",
+      "imageUrl": "https://assets.clevelandclinic.org/transform/11c5739d-f105-475a-b756-7463f3d603b5/Keto-Diet-1133794221-770x533-1_jpg",
       "description": "The Keto diet is a low-carb, high-fat diet that aims to put the body into a state of ketosis, where it burns fat for fuel instead of carbohydrates. It involves significantly reducing carbohydrate intake and increasing fat consumption.",
       "whatToEat": [
         "Meat",
@@ -26,8 +27,9 @@
       ]
     },
     {
+      "id": "2",
     "title": "Mediterranean Diet",
-    "imageUrl": "https://example.com/mediterranean-diet.jpg",
+    "imageUrl": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/3/4/2/FNM_040113-Classic-Greek-Salad-Recipe_s4x3.jpg.rend.hgtvcom.616.462.suffix/1382542290621.jpeg",
     "description": "The Mediterranean diet emphasizes fruits, vegetables, whole grains, nuts, and seeds, along with healthy fats from olive oil and fish.",
     "whatToEat": [
       "Fruits",
@@ -48,8 +50,9 @@
     ]
   },
   {
+    "id": "3",
     "title": "Paleo Diet",
-    "imageUrl": "https://example.com/paleo-diet.jpg",
+    "imageUrl": "https://www.eatthis.com/wp-content/uploads/sites/4//media/images/ext/574112094/paleo-foods.jpg?quality=82&strip=1",
     "description": "The Paleo diet focuses on consuming foods that would have been available to our ancestors, including meat, fish, fruits, vegetables, nuts, and seeds.",
     "whatToEat": [
       "Meat",
@@ -71,8 +74,9 @@
     ]
   },
   {
+    "id": "4",
     "title": "Vegan Diet",
-    "imageUrl": "https://example.com/vegan-diet.jpg",
+    "imageUrl": "https://images.everydayhealth.com/images/diet-nutrition/what-is-a-vegan-diet-benefits-food-list-beginners-guide-alt-1440x810.jpg?sfvrsn=1d260c85_1",
     "description": "The Vegan diet excludes all animal products, focusing on plant-based foods including fruits, vegetables, grains, nuts, and seeds.",
     "whatToEat": [
       "Fruits",
@@ -94,8 +98,9 @@
     ]
   },
   {
+    "id": "5",
     "title": "Mediterranean Dash Diet",
-    "imageUrl": "https://example.com/mediterranean-dash-diet.jpg",
+    "imageUrl": "https://welltech.com/wp-content/uploads/2023/01/mediterranean-dash-diet_cover.jpg",
     "description": "The Mediterranean Dash Diet combines elements of the Mediterranean diet with the principles of the DASH (Dietary Approaches to Stop Hypertension) diet to manage blood pressure.",
     "whatToEat": [
       "Whole grains",
@@ -115,8 +120,9 @@
     ]
   },
   {
+    "id": "6",
     "title": "Whole30 Diet",
-    "imageUrl": "https://example.com/whole30-diet.jpg",
+    "imageUrl": "https://cdn.mos.cms.futurecdn.net/M5uFTpYEYB9G8hrdDe2WUe-1200-80.jpg.webp",
     "description": "The Whole30 diet is a 30-day program focusing on eating whole, unprocessed foods and eliminating sugar, alcohol, grains, legumes, and dairy.",
     "whatToEat": [
       "Meat",
@@ -139,8 +145,9 @@
     ]
   },
   {
+    "id": "7",
       "title": "DASH Diet",
-      "imageUrl": "https://example.com/dash-diet.jpg",
+      "imageUrl": "https://i0.wp.com/thelecc.com/wp-content/uploads/2021/04/image-asset.jpeg?resize=800%2C600&ssl=1",
       "description": "The DASH diet (Dietary Approaches to Stop Hypertension) focuses on reducing blood pressure through a balanced diet rich in fruits, vegetables, whole grains, and low-fat dairy while limiting sodium, saturated fats, and cholesterol.",
       "whatToEat": [
         "Fruits",
@@ -161,8 +168,9 @@
       ]
     },
     {
+      "id": "8",
       "title": "Flexitarian Diet",
-      "imageUrl": "https://example.com/flexitarian-diet.jpg",
+      "imageUrl": "https://images.immediate.co.uk/production/volatile/sites/30/2023/12/Smoked-salmon-on-toast-59ba98e.jpg?quality=90&webp=true&resize=440,400",
       "description": "The Flexitarian diet is a flexible vegetarian diet that emphasizes plant-based foods but allows for occasional meat and fish consumption. It focuses on improving overall health and reducing the environmental impact of meat consumption.",
       "whatToEat": [
         "Fruits",
@@ -184,8 +192,9 @@
       ]
     },
     {
+      "id": "9",
       "title": "Raw Food Diet",
-      "imageUrl": "https://example.com/raw-food-diet.jpg",
+      "imageUrl": "https://experiencelife.lifetime.life/wp-content/uploads/2022/02/apr22-nut-raw-story.jpg",
       "description": "The Raw Food diet consists of unprocessed, uncooked, and often organic foods, including fruits, vegetables, nuts, seeds, and sprouted grains. It is believed to help with detoxification and improve overall health.",
       "whatToEat": [
         "Fruits",
@@ -205,8 +214,9 @@
       ]
     },
     {
+      "id": "10",
       "title": "Whole Foods Plant-Based Diet",
-      "imageUrl": "https://example.com/whole-foods-plant-based-diet.jpg",
+      "imageUrl": "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/topic_centers/2020-7/whole-food-foods-healthy-vegetables-eggs-ingredients-1296x728-header.jpg?w=1155&h=1528",
       "description": "The Whole Foods Plant-Based diet focuses on consuming whole, unprocessed plant foods. It excludes animal products, processed foods, and refined sugars, aiming to improve health and prevent chronic diseases.",
       "whatToEat": [
         "Whole grains",
@@ -227,8 +237,9 @@
       ]
     },
     {
+      "id": "11",
       "title": "Anti-Inflammatory Diet",
-      "imageUrl": "https://example.com/anti-inflammatory-diet.jpg",
+      "imageUrl": "https://mydoctor.kaiserpermanente.org/mas/Images/thumbnail_large_blog-anti-inflammatory-diet-1_tcm88-2424496.jpg",
       "description": "The Anti-Inflammatory diet focuses on reducing inflammation in the body by consuming foods with anti-inflammatory properties and avoiding those that may trigger inflammation. It aims to improve overall health and manage chronic conditions.",
       "whatToEat": [
         "Berries",
@@ -251,8 +262,9 @@
     },
     
       {
+        "id": "12",
         "title": "Atkins Diet",
-        "imageUrl": "https://example.com/atkins-diet.jpg",
+        "imageUrl": "https://media.post.rvohealth.io/wp-content/uploads/2020/09/atkins-diet-101-1200x628-facebook-1200x628.jpg",
         "description": "The Atkins Diet is a low-carb diet that emphasizes protein and fat consumption while reducing carbohydrate intake. It is designed to help with weight loss and improve overall health.",
         "whatToEat": [
           "Meat",
@@ -275,8 +287,9 @@
         ]
       },
       {
+        "id": "13",
         "title": "South Beach Diet",
-        "imageUrl": "https://example.com/south-beach-diet.jpg",
+        "imageUrl": "https://res-4.cloudinary.com/sharecare/image/upload/c_fill,f_auto,g_faces:center,h_340,w_600/v1530903488/slideshows/secrets-steal-south-beach-diet-01",
         "description": "The South Beach Diet is a low-carb diet that emphasizes lean proteins, healthy fats, and high-fiber carbohydrates. It aims to promote weight loss and heart health.",
         "whatToEat": [
           "Lean meats",
@@ -297,8 +310,9 @@
         ]
       },
       {
+        "id": "14",
         "title": "Zone Diet",
-        "imageUrl": "https://example.com/zone-diet.jpg",
+        "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/766/zone-diet-results-1515504969.jpg",
         "description": "The Zone Diet focuses on balancing macronutrients (proteins, carbohydrates, and fats) in a 40:30:30 ratio to stabilize blood sugar levels and promote weight loss.",
         "whatToEat": [
           "Lean proteins",
@@ -318,8 +332,9 @@
         ]
       },
       {
+        "id": "15",
         "title": "Alkaline Diet",
-        "imageUrl": "https://example.com/alkaline-diet.jpg",
+        "imageUrl": "https://draxe.com/wp-content/uploads/2023/01/DrAxeAlkalineDietHeader.jpg",
         "description": "The Alkaline Diet focuses on consuming foods that are believed to help maintain the body's pH balance by emphasizing alkaline-forming foods and reducing acid-forming foods.",
         "whatToEat": [
           "Fruits (especially citrus fruits)",
@@ -340,8 +355,9 @@
         ]
       },
       {
+        "id": "16",
         "title": "FODMAP Diet",
-        "imageUrl": "https://example.com/fodmap-diet.jpg",
+        "imageUrl": "https://media.self.com/photos/6197d2528ac96526ea2a6cff/4:3/w_2560%2Cc_limit/low%2520fodmap%2520diet.jpg",
         "description": "The FODMAP Diet is designed to help manage symptoms of irritable bowel syndrome (IBS) and other digestive disorders by reducing the intake of fermentable carbohydrates known as FODMAPs.",
         "whatToEat": [
           "Low-FODMAP fruits (strawberries, blueberries)",

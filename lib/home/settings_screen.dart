@@ -28,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 25.0),
                   child: ListTile(
                     title: Text(
-                      'Clickable Text 1',
+                      'Sign out',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                 onTap: () {
@@ -50,7 +50,7 @@ class SettingsScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 25.0),
                   child: ListTile(
                     title: Text(
-                      'Clickable Text 2',
+                      'Delete Account',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                 onTap: () {
@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
           // Image 
           Container(
             padding: EdgeInsets.all(16.0),
-            child: Image.asset('assets/your_image.png'), 
+            child: Image.asset('assets/images/settingsimg.png', height: 300, width: 300), 
           ),
         ],
       ),
@@ -99,9 +99,4 @@ void _showWarning(BuildContext context) {
   }
 
 
-/*
-void main() {
-  runApp(MaterialApp(
-    home: SettingsScreen(),
-  ));
-} */
+
