@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Diet {
+  final String id;
   final String title;
   final String imageUrl;
   final String description;
@@ -9,6 +10,7 @@ class Diet {
   final List<String> whoShouldAvoid;
 
   const Diet({
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.description,
@@ -19,6 +21,7 @@ class Diet {
 
   factory Diet.fromMap(Map<String, dynamic> map) {
     return Diet(
+      id: map['id'],
       title: map['title'],
       imageUrl: map['imageUrl'],
       description: map['description'],
