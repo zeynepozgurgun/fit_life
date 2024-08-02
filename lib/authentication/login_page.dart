@@ -64,15 +64,11 @@ class SlidingPanel extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Stack(
             children: [
-              Positioned(
-                top: -16,
-                left: MediaQuery.of(context).size.width / 2 - 16, 
-                child: Icon(
+              Icon(
                   Icons.keyboard_arrow_up,
                   color: colorScheme.onSecondary,
                   size: 24,
                 ),
-              ),
               ListView(
                 controller: controller,
                 children: [
