@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Diet.dart';  
+import 'diet.dart';  
 
 class DietService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

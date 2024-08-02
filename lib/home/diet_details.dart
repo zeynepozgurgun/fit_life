@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fit_life/data/Diet.dart';
+import 'package:fit_life/data/diet.dart';
 
 class DietDetailScreen extends StatelessWidget {
   final Diet diet;
