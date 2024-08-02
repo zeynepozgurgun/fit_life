@@ -2,7 +2,7 @@
 import 'package:fit_life/home/base.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_life/core/theme.dart'; // appTheme'i import ediyoruz
-import 'features/login_page.dart'; // LoginPage'i import ediyoruz
+import 'authentication/login_page.dart'; // LoginPage'i import ediyoruz
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitlife',
       theme: appTheme, 
-      home: BaseScreen(), 
+      home: LoginPage(), 
       //debugShowCheckedModeBanner: false, 
     );
   }

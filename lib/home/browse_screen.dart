@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fit_life/data/Diet.dart';
-import 'package:fit_life/data/DietService.dart';
+import 'package:fit_life/data/diet.dart';
+import 'package:fit_life/data/diet_service.dart';
 import 'package:fit_life/home/diet_details.dart';
 
 class BrowseScreen extends StatefulWidget {
