@@ -29,24 +29,28 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           children: [
             Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'FIT-LIFE',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Welcome!\nswipe up to continue',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 20),
-                  Image.asset('assets/images/login_image.png', height: 200),
-                ],
-              ),
-            ),
+  child: Padding(
+    padding: const EdgeInsets.only(bottom: 150.0), 
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'FIT-LIFE',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 10),
+        Text(
+          'Welcome!\nswipe up to continue',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 20),
+        Image.asset('assets/images/login_image.png', height: 300, width: 400),
+      ],
+    ),
+  ),
+),
+
             SlidingPanel(_emailController, _passwordController),
           ],
         ),

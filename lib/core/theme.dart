@@ -20,7 +20,7 @@ final ThemeData appTheme = ThemeData(
   textTheme: TextTheme(
     titleLarge: TextStyle( //APP NAME
       fontSize: 30.0,
-      fontWeight: FontWeight.w800,
+      fontWeight: FontWeight.w900,
       color: _colors.onSecondary,
     ),
   
