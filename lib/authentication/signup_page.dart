@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_life/authentication/login_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -9,6 +10,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -40,7 +42,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Email:',  
+                'Email:',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 20),
@@ -51,7 +53,7 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
-                  controller: _emailController,  
+                  controller: _emailController,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12.0),
@@ -72,7 +74,7 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
-                  controller: _passwordController,  
+                  controller: _passwordController,
                   obscureText: true,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: const InputDecoration(
@@ -82,7 +84,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              Center( 
+              Center(
                 child: ElevatedButton(
                   onPressed: () async {
                     final String email = _emailController.text;
@@ -118,7 +120,6 @@ class _SignupPageState extends State<SignupPage> {
                       return;
                     }
 
-      
                     if (password.length < 6) {
                       showSnackBar('Password must be at least 6 characters long.');
                       return;
@@ -129,9 +130,22 @@ class _SignupPageState extends State<SignupPage> {
                         email: email,
                         password: password,
                       );
+                      User? user = userCredential.user;
+
+                      if (user != null) {  //DATA TRANSFERRED TO FIREBASE HERE
+                        await _firestore.collection('users').doc(user.uid).set({
+                          'id': user.uid,
+                          'goal': '',
+                          'age': 0,
+                          'height': 0.0,
+                          'weight': 0.0,
+                          'gender': '',
+                          'preferences': '',
+                        });
+                      }
+
                       showSnackBar('Successfully created account.');
 
-                    
                       await Future.delayed(Duration(seconds: 2));
 
                       Navigator.pushReplacement(

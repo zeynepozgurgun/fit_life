@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'dart:io';
+import 'package:fit_life/data/options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -11,6 +17,32 @@ class MyAccount extends StatefulWidget {
 
 class _MyAccountState extends State<MyAccount> {
   File? _image;
+  List<String> _selectedGoals = [];
+  List<String> _selectedGenders = [];
+  List<String> _selectedPreferences = [];
+
+    // Controller for the Age TextField
+    
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+  
+  
+  @override
+  void initState() {
+    super.initState();
+    // Initialize any other state here if needed
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controller to prevent memory leaks
+    _ageController.dispose();
+    _heightController.dispose();
+    _weightController.dispose();
+    super.dispose();
+  }
+
 
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -28,7 +60,6 @@ class _MyAccountState extends State<MyAccount> {
       backgroundColor: colorScheme.surface,
       body: Stack(
         children: [
-          // Yellow circle on top
           Positioned(
             top: 0,
             left: 0,
@@ -96,118 +127,212 @@ class _MyAccountState extends State<MyAccount> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  InputFieldRow(label: 'Goal:', child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none, 
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  ////////////////////////
+                  InputFieldRow(
+                    label: 'Goal:',
+                    child: MultiSelectDialogField<String>(
+                      items: goalOptions.map((String goal) {
+                        return MultiSelectItem<String>(goal, goal);
+                      }).toList(),
+                      initialValue: _selectedGoals,
+                      onConfirm: (List<String> selected) {
+                        setState(() {
+                          _selectedGoals = selected;
+                        });
+                      },
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      buttonText: 
+                      Text(
+                        _selectedGoals.isEmpty ? 'choose all that apply' : _selectedGoals.join(', '),
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      chipDisplay: MultiSelectChipDisplay.none(),
                     ),
-
-                    items: <String>['Option 1', 'Option 2', 'Option 3'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 10),
 
-                  InputFieldRow( label: 'Age:', child: TextField(
-                    
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none, 
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  InputFieldRow(
+                    label: 'Age:',
+                    child: TextField(
+                      controller: _ageController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0),
+                      ),
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 10),
 
-                  InputFieldRow(label: 'Height:', child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none, 
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  InputFieldRow(
+                    label: 'Height:',
+                    child: TextField(
+                      controller: _heightController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0),
+                      ),
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 10),
 
-                  InputFieldRow(label: 'Weight:', child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none, 
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  InputFieldRow(
+                    label: 'Weight:',
+                    child: TextField(
+                      controller: _weightController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0),
+                      ),
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 10),
 
-                  InputFieldRow(label: 'See diets for:', child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none, 
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  InputFieldRow(
+                    label: 'See diets for:',
+                    child: MultiSelectDialogField<String>(
+                      items: genderOptions.map((String gender) {
+                        return MultiSelectItem<String>(gender, gender);
+                      }).toList(),
+                      initialValue: _selectedGenders,
+                      onConfirm: (List<String> selected) {
+                        setState(() {
+                          _selectedGenders = selected;
+                        });
+                      },
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      buttonText: 
+                      Text(
+                        _selectedGenders.isEmpty ? 'choose all that apply' : _selectedGenders.join(', '),
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      chipDisplay: MultiSelectChipDisplay.none(),
                     ),
-                    items: <String>['Men', 'Women', 'Unisex'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 10),
 
-                  InputFieldRow(label: 'Preferences:', child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)
+                  InputFieldRow(
+                    label: 'Preferences:',
+                    child: MultiSelectDialogField<String>(
+                      items: preferenceOptions.map((String pref) {
+                        return MultiSelectItem<String>(pref, pref);
+                      }).toList(),
+                      initialValue: _selectedPreferences,
+                      onConfirm: (List<String> selected) {
+                        setState(() {
+                          _selectedPreferences = selected;
+                        });
+                      },
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      buttonText: 
+                      Text(
+                        _selectedPreferences.isEmpty ? 'choose all that apply' : _selectedPreferences.join(', '),
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      chipDisplay: MultiSelectChipDisplay.none(),
                     ),
-                    items: <String>['Gluten-free', 'Vegan', 'Vegetarian', 'Lactose-Free'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )),
+                  ),
 
                   const SizedBox(height: 20),
-                Center( // Center the button
-                  child: ElevatedButton(
-                    onPressed: () {
-                      
+
+                  
+
+                  Center(
+
+
+////////////////
+                    child: ElevatedButton(
+                    onPressed: () async {
+                      final String ageText = _ageController.text;
+                      final String heightText = _heightController.text;
+                      final String weightText = _weightController.text;
+
+                      void showSnackBar(String message) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.onError,
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  message,
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            behavior: SnackBarBehavior.floating,
+                            elevation: 0,
+                          ),
+                        );
+                      }
+
+                      try {
+                        final FirebaseAuth auth = FirebaseAuth.instance;
+                        final User? user = auth.currentUser;
+
+                        if (user != null) {
+                          final int age = int.tryParse(ageText) ?? 0; // Parse age text to int or use 0 if parsing fails
+                          final int height = int.tryParse(heightText) ?? 0;
+                          final int weight = int.tryParse(weightText) ?? 0;
+
+                          await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+                            'goal': _selectedGoals, 
+                            'age': age,
+                            'height': height,
+                            'weight': weight,
+                            'gender': _selectedGenders,
+                            'preferences': _selectedPreferences,
+                            // You can update other fields as needed
+                          });
+
+                          showSnackBar('Your changes have been saved.');
+
+                          await Future.delayed(Duration(seconds: 2));
+
+                        } else {
+                          showSnackBar('No user is logged in.');
+                        }
+                      } catch (e) {
+                        showSnackBar('An error occurred: ${e.toString()}');
+                      }
                     },
                     child: Text('Save Changes'),
-                    
                     style: ElevatedButton.styleFrom(
-                      
                       backgroundColor: colorScheme.onSecondary,
                       foregroundColor: Colors.white,
                     ),
                   ),
-                ),
-                
+      /////////
+      
+
+                  ),
                 ],
               ),
             ),
@@ -216,7 +341,6 @@ class _MyAccountState extends State<MyAccount> {
       ),
     );
   }
-  
 }
 
 class InputFieldRow extends StatelessWidget {
@@ -225,25 +349,25 @@ class InputFieldRow extends StatelessWidget {
     required this.label,
     required this.child,
   });
+
   final String label;
-  final Widget child; 
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center, 
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Text(
               label,
               style: Theme.of(context).textTheme.headlineLarge,
-              textAlign: TextAlign.left, 
+              textAlign: TextAlign.left,
             ),
           ),
           SizedBox(width: 200, child: child),
-      
         ],
       ),
     );
