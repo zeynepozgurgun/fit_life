@@ -9,7 +9,7 @@ const ColorScheme _colors = const ColorScheme(
   surface: const Color(0xFF39bebe),
   error: const Color(0xffF9371D),
   onPrimaryContainer: const Color(0xffA2AAAB),
-  onError: const Color(0xFF9AFFFF),
+  onError: Color.fromARGB(255, 158, 216, 216),
   onSurface: const Color(0xFF49454F),
   brightness: Brightness.light,
 );
@@ -20,7 +20,7 @@ final ThemeData appTheme = ThemeData(
   textTheme: TextTheme(
     titleLarge: TextStyle( //APP NAME
       fontSize: 30.0,
-      fontWeight: FontWeight.w800,
+      fontWeight: FontWeight.w900,
       color: _colors.onSecondary,
     ),
   
@@ -36,7 +36,7 @@ final ThemeData appTheme = ThemeData(
 
     headlineSmall: TextStyle( //username: + cont without an acc. + warnings
     fontSize: 17.0,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     color: _colors.secondary,),
 
     headlineMedium: TextStyle( //you havent signed up to an account

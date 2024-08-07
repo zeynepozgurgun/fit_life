@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_life/authentication/login_page.dart';
 
-import 'package:fit_life/features/login_page.dart';
+class SignupPage extends StatefulWidget {
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
 
+class _SignupPageState extends State<SignupPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -32,7 +40,7 @@ class SignupPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'Username:',
+                'Email:',  
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 20),
@@ -43,6 +51,7 @@ class SignupPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
+                  controller: _emailController,  
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12.0),
@@ -63,6 +72,7 @@ class SignupPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
+                  controller: _passwordController,  
                   obscureText: true,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: const InputDecoration(
@@ -72,13 +82,69 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Center( // Center the button
+              Center( 
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
+                  onPressed: () async {
+                    final String email = _emailController.text;
+                    final String password = _passwordController.text;
+
+                    void showSnackBar(String message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.onError,
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                message,
+                                style: Theme.of(context).textTheme.headlineSmall,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          backgroundColor: Colors.transparent,
+                          behavior: SnackBarBehavior.floating,
+                          elevation: 0,
+                        ),
+                      );
+                    }
+
+                    final RegExp emailRegExp = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                    if (!emailRegExp.hasMatch(email)) {
+                      showSnackBar('Please enter a valid email address.');
+                      return;
+                    }
+
+      
+                    if (password.length < 6) {
+                      showSnackBar('Password must be at least 6 characters long.');
+                      return;
+                    }
+
+                    try {
+                      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      showSnackBar('Successfully created account.');
+
+                    
+                      await Future.delayed(Duration(seconds: 2));
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'email-already-in-use') {
+                        showSnackBar('The email address is already in use.');
+                      } else {
+                        showSnackBar('An error occurred: ${e.message}');
+                      }
+                    }
                   },
                   child: Text('Create Account'),
                   style: ElevatedButton.styleFrom(
