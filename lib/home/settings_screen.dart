@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fit_life/authentication/login_page.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -6,38 +7,37 @@ class SettingsScreen extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      
       body: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           Center(
-          child: Container(
-            padding: EdgeInsets.only(top: 120.0),
-            child: Text(
-              'Settings',
-              style: Theme.of(context).textTheme.titleSmall,
+            child: Container(
+              padding: EdgeInsets.only(top: 120.0),
+              child: Text(
+                'Settings',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
             ),
-          ),
           ),
           
           const SizedBox(height: 40),
 
           Column(
             children: <Widget>[
-             Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    title: Text(
-                      'Sign out',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                onTap: () {
-                  
-                },
-              ),
+                child: ListTile(
+                  title: Text(
+                    'Sign out',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  onTap: () {
+                    _signOut(context);
+                  },
+                ),
               ),
 
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 35.0),
                 child: Divider(
@@ -48,20 +48,20 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Padding(
                 padding: EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    title: Text(
-                      'Delete Account',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                onTap: () {
+                child: ListTile(
+                  title: Text(
+                    'Delete Account',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  onTap: () {
                     _showWarning(context);
                   },
-              ),
+                ),
               ),
             ],
           ),
           
-          // Image 
+         
           Container(
             padding: EdgeInsets.all(16.0),
             child: Image.asset('assets/images/settingsimg.png', height: 300, width: 300), 
@@ -70,9 +70,39 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+
+void _signOut(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onError,
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        child: Center(
+        child: Text(
+          'Signed out successfully.',
+          style: Theme.of(context).textTheme.headlineSmall,
+          textAlign: TextAlign.center, 
+        ),
+      ),
+      ),
+      backgroundColor: Colors.transparent, 
+      behavior: SnackBarBehavior.floating,
+      elevation: 0,  
+    ),
+  );
+
+  Future.delayed(Duration(seconds: 1), () {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => LoginPage(),
+    ));
+  });
 }
 
-void _showWarning(BuildContext context) {
+
+  void _showWarning(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -97,6 +127,5 @@ void _showWarning(BuildContext context) {
       },
     );
   }
-
-
+}
 
