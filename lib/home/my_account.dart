@@ -21,8 +21,6 @@ class _MyAccountState extends State<MyAccount> {
   List<String> _selectedGenders = [];
   List<String> _selectedPreferences = [];
 
-    // Controller for the Age TextField
-    
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
@@ -31,12 +29,10 @@ class _MyAccountState extends State<MyAccount> {
   @override
   void initState() {
     super.initState();
-    // Initialize any other state here if needed
   }
 
   @override
   void dispose() {
-    // Dispose of the controller to prevent memory leaks
     _ageController.dispose();
     _heightController.dispose();
     _weightController.dispose();
@@ -298,7 +294,7 @@ class _MyAccountState extends State<MyAccount> {
                         final User? user = auth.currentUser;
 
                         if (user != null) {
-                          final int age = int.tryParse(ageText) ?? 0; // Parse age text to int or use 0 if parsing fails
+                          final int age = int.tryParse(ageText) ?? 0; // parses age text to int or use 0 if parsing fails
                           final int height = int.tryParse(heightText) ?? 0;
                           final int weight = int.tryParse(weightText) ?? 0;
 
@@ -309,7 +305,7 @@ class _MyAccountState extends State<MyAccount> {
                             'weight': weight,
                             'gender': _selectedGenders,
                             'preferences': _selectedPreferences,
-                            // You can update other fields as needed
+                          
                           });
 
                           showSnackBar('Your changes have been saved.');
