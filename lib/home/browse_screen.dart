@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fit_life/data/diet.dart';
+import 'package:fit_life/data/user.dart';
 import 'package:fit_life/data/diet_service.dart';
 import 'package:fit_life/home/diet_details.dart';
 
@@ -15,8 +18,27 @@ class _BrowseScreenState extends State<BrowseScreen> {
   @override
   void initState() {
     super.initState();
-    _diets = DietService().fetchDiets();  // Fetch diets from Firestore
+    _diets = Future.value([]); // Initialize with an empty list
+    _loadDiets();
   }
+
+ Future<void> _loadDiets() async {
+  final userId = firebase_auth.FirebaseAuth.instance.currentUser!.uid;
+  final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+  final user = User.fromDocumentSnapshot(userDoc);
+
+  final allDiets = await DietService().fetchDiets();
+
+
+  setState(() {
+    if (!isForYouSelected){
+      _diets = Future.value(allDiets);
+    }
+    else{
+      _diets =  Future.value([]); 
+    }
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -28,59 +50,60 @@ class _BrowseScreenState extends State<BrowseScreen> {
           children: [
             // Switch bar
             Container(
-  decoration: BoxDecoration(
-    border: Border.all(color: colorScheme.onSecondary , width: 1), // Outline 
-    borderRadius: BorderRadius.circular(50),
-  ),
-         child:  Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isForYouSelected = true;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: isForYouSelected ? colorScheme.onPrimary : colorScheme.surface, // FOR YOU
-                      borderRadius: BorderRadius.horizontal(left: Radius.circular(40)),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'For You',
-                      style: Theme.of(context).textTheme.displaySmall,
+              decoration: BoxDecoration(
+                border: Border.all(color: colorScheme.onSecondary, width: 1),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isForYouSelected = true;
+                          _loadDiets();
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isForYouSelected ? colorScheme.onPrimary : colorScheme.surface,
+                          borderRadius: BorderRadius.horizontal(left: Radius.circular(40)),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        alignment: Alignment.center,
+                        child: Text(
+                          'For You',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isForYouSelected = false;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: !isForYouSelected ? colorScheme.onPrimary : colorScheme.surface, // BROWSE ALL
-                      borderRadius: BorderRadius.horizontal(right: Radius.circular(40)),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Browse All',
-                      style: Theme.of(context).textTheme.displaySmall,
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isForYouSelected = false;
+                          _loadDiets();
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: !isForYouSelected ? colorScheme.onPrimary : colorScheme.surface,
+                          borderRadius: BorderRadius.horizontal(right: Radius.circular(40)),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Browse All',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
             ),
-
             SizedBox(height: 20),
             // Search bar
             TextField(
@@ -89,16 +112,12 @@ class _BrowseScreenState extends State<BrowseScreen> {
                 hintText: 'Search for keywords',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                  
                   borderRadius: BorderRadius.circular(50),
-                   
                 ),
               ),
             ),
             SizedBox(height: 10),
-            
-
-            //CLICKABLE DIETS
+            // Diet list
             Expanded(
               child: FutureBuilder<List<Diet>>(
                 future: _diets,
@@ -116,7 +135,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                       ),
-                      itemCount: snapshot.data!.length,  // Number of items in the data list
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         Diet diet = snapshot.data![index];
                         return GestureDetector(
@@ -131,26 +150,23 @@ class _BrowseScreenState extends State<BrowseScreen> {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.black.withOpacity(0.5), // Adding a semi-transparent color
+                              color: Colors.black.withOpacity(0.5),
                             ),
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
-                                // Background image with 50% opacity
                                 Opacity(
                                   opacity: 0.5,
                                   child: Image.network(
                                     diet.imageUrl,
-                                    fit: BoxFit.cover, // Make sure the image covers the container
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                // Centered text
                                 Center(
                                   child: Text(
                                     diet.title,
                                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                      //color: Colors.white, // Make sure the text is readable on the image
-                                      backgroundColor: Colors.white.withOpacity(0.5), // Optional: Adds a background color to the text
+                                      backgroundColor: Colors.white.withOpacity(0.5),
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -159,8 +175,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                             ),
                           ),
                         );
-                      }
-
+                      },
                     );
                   }
                 },

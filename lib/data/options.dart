@@ -11,6 +11,7 @@ const List<String> goalOptions = [
   'Stress Reduction',
   'Improved Immune Function',
   'General Wellness',
+  'Detox'
 ];
 
 const List<String> genderOptions = ['Men', 'Women', 'Unisex'];
@@ -22,11 +23,9 @@ const List<String> preferenceOptions = [
   'Dairy Free',
   'Low Carb',
   'Organic',
-  'Halal',
-  'Kosher',
   'Non-GMO',
   'Low Sodium',
   'High Protein',
   'Low Sugar',
-  'No Nuts',
+  'High Fiber'
 ];

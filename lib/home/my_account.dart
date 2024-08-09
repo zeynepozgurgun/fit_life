@@ -126,7 +126,9 @@ class _MyAccountState extends State<MyAccount> {
                   ////////////////////////
                   InputFieldRow(
                     label: 'Goal:',
+                    
                     child: MultiSelectDialogField<String>(
+                      
                       items: goalOptions.map((String goal) {
                         return MultiSelectItem<String>(goal, goal);
                       }).toList(),
@@ -142,10 +144,11 @@ class _MyAccountState extends State<MyAccount> {
                       buttonText: 
                       Text(
                         _selectedGoals.isEmpty ? 'choose all that apply' : _selectedGoals.join(', '),
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(overflow: TextOverflow.ellipsis),
                       ),
-                      chipDisplay: MultiSelectChipDisplay.none(),
+                      chipDisplay: MultiSelectChipDisplay.none(scroll:true),
                     ),
+                    
                   ),
 
                   const SizedBox(height: 10),
@@ -363,7 +366,9 @@ class InputFieldRow extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
-          SizedBox(width: 200, child: child),
+          Expanded(
+             child: child
+          )
         ],
       ),
     );
