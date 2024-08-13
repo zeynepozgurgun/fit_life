@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
-
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
 
@@ -29,6 +28,7 @@ class _MyAccountState extends State<MyAccount> {
   @override
   void initState() {
     super.initState();
+    _loadUserData();
   }
 
   @override
@@ -38,6 +38,38 @@ class _MyAccountState extends State<MyAccount> {
     _weightController.dispose();
     super.dispose();
   }
+
+  Future<void> _loadUserData() async {
+  try {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+
+    if (user != null) {
+      final DocumentSnapshot doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+
+      if (doc.exists) {
+        final data = doc.data() as Map<String, dynamic>;
+
+        setState(() {
+          _selectedGoals = List<String>.from(data['goal'] ?? []);
+          _selectedGenders = List<String>.from(data['gender'] ?? []);
+          _selectedPreferences = List<String>.from(data['preferences'] ?? []);
+
+          _ageController.text = data['age']?.toString() ?? '';
+          _heightController.text = data['height']?.toString() ?? '';
+          _weightController.text = data['weight']?.toString() ?? '';
+          
+          if (data.containsKey('profile_picture')) {
+            _image = File(data['profile_picture']);
+          }
+        });
+      }
+    }
+  } catch (e) {
+    // Handle error
+    print('Error loading user data: ${e.toString()}');
+  }
+}
 
 
   Future<void> _pickImage() async {
@@ -171,7 +203,7 @@ class _MyAccountState extends State<MyAccount> {
                   const SizedBox(height: 10),
 
                   InputFieldRow(
-                    label: 'Height:',
+                    label: 'Height:\n(in cm)',
                     child: TextField(
                       controller: _heightController,
                       keyboardType: TextInputType.number,
@@ -188,7 +220,7 @@ class _MyAccountState extends State<MyAccount> {
                   const SizedBox(height: 10),
 
                   InputFieldRow(
-                    label: 'Weight:',
+                    label: 'Weight:\n(in kg)',
                     child: TextField(
                       controller: _weightController,
                       keyboardType: TextInputType.number,
