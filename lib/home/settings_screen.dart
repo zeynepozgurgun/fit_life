@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_life/authentication/login_page.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -61,7 +63,6 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           
-         
           Container(
             padding: EdgeInsets.all(16.0),
             child: Image.asset('assets/images/settingsimg.png', height: 300, width: 300), 
@@ -71,44 +72,43 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-void _signOut(BuildContext context) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onError,
-          borderRadius: BorderRadius.circular(50.0),
+  void _signOut(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onError,
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          child: Center(
+            child: Text(
+              'Signed out successfully.',
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
-        child: Center(
-        child: Text(
-          'Signed out successfully.',
-          style: Theme.of(context).textTheme.headlineSmall,
-          textAlign: TextAlign.center, 
-        ),
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
       ),
-      ),
-      backgroundColor: Colors.transparent, 
-      behavior: SnackBarBehavior.floating,
-      elevation: 0,  
-    ),
-  );
+    );
 
-  Future.delayed(Duration(seconds: 1), () {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => LoginPage(),
-    ));
-  });
-}
-
+    Future.delayed(Duration(seconds: 1), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ));
+    });
+  }
 
   void _showWarning(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(''),
-          content: Text('Are you sure you want to delete your account?'),
+          title: Text('Delete Account'),
+          content: Text('Are you sure you want to delete your account? This action cannot be undone.'),
           actions: <Widget>[
             TextButton(
               child: Text('Cancel'),
@@ -119,7 +119,32 @@ void _signOut(BuildContext context) {
             TextButton(
               child: Text('Delete my account'),
               onPressed: () {
-                Navigator.of(context).pop();
+                _deleteAccount(context);
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LoginPage(),
+                ));
+                
+                ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onError,
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            child: Center(
+              child: Text(
+                'Account deleted successfully.',
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          behavior: SnackBarBehavior.floating,
+          elevation: 0,
+        ),
+      );
               },
             ),
           ],
@@ -127,5 +152,27 @@ void _signOut(BuildContext context) {
       },
     );
   }
-}
 
+  Future<void> _deleteAccount(BuildContext context) async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      final User? user = auth.currentUser;
+
+      if (user != null) {
+        // delete user document from Firestore
+        await firestore.collection('users').doc(user.uid).delete();
+        await user.delete();
+
+        _signOut(context);
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+}
