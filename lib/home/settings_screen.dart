@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_life/authentication/login_page.dart';
+import 'package:fit_life/methods/mixins.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> with SnackBarMixin {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -73,27 +79,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _signOut(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onError,
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          child: Center(
-            child: Text(
-              'Signed out successfully.',
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        behavior: SnackBarBehavior.floating,
-        elevation: 0,
-      ),
-    );
+    showSnackBar(context, 'Signed out successfully.');
 
     Future.delayed(Duration(seconds: 1), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -121,30 +107,10 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 _deleteAccount(context);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => LoginPage(),
+                  builder: (context) => LoginPage(),
                 ));
                 
-                ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onError,
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: Center(
-              child: Text(
-                'Account deleted successfully.',
-                style: Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          behavior: SnackBarBehavior.floating,
-          elevation: 0,
-        ),
-      );
+                showSnackBar(context, 'Account deleted successfully.');
               },
             ),
           ],
@@ -167,12 +133,7 @@ class SettingsScreen extends StatelessWidget {
         _signOut(context);
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('An error occurred: ${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      showSnackBar(context, 'An error occurred: ${e.toString()}');
     }
   }
 }

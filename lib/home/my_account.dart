@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:fit_life/data/options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:fit_life/methods/mixins.dart';
+import 'package:fit_life/methods/classes.dart';
 
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
@@ -14,7 +15,7 @@ class MyAccount extends StatefulWidget {
   _MyAccountState createState() => _MyAccountState();
 }
 
-class _MyAccountState extends State<MyAccount> {
+class _MyAccountState extends State<MyAccount> with SnackBarMixin {
   File? _image;
   List<String> _selectedGoals = [];
   List<String> _selectedGenders = [];
@@ -23,7 +24,6 @@ class _MyAccountState extends State<MyAccount> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
-  
   
   @override
   void initState() {
@@ -40,37 +40,36 @@ class _MyAccountState extends State<MyAccount> {
   }
 
   Future<void> _loadUserData() async {
-  try {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User? user = auth.currentUser;
 
-    if (user != null) {
-      final DocumentSnapshot doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      if (user != null) {
+        final DocumentSnapshot doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
 
-      if (doc.exists) {
-        final data = doc.data() as Map<String, dynamic>;
+        if (doc.exists) {
+          final data = doc.data() as Map<String, dynamic>;
 
-        setState(() {
-          _selectedGoals = List<String>.from(data['goal'] ?? []);
-          _selectedGenders = List<String>.from(data['gender'] ?? []);
-          _selectedPreferences = List<String>.from(data['preferences'] ?? []);
+          setState(() {
+            _selectedGoals = List<String>.from(data['goal'] ?? []);
+            _selectedGenders = List<String>.from(data['gender'] ?? []);
+            _selectedPreferences = List<String>.from(data['preferences'] ?? []);
 
-          _ageController.text = data['age']?.toString() ?? '';
-          _heightController.text = data['height']?.toString() ?? '';
-          _weightController.text = data['weight']?.toString() ?? '';
-          
-          if (data.containsKey('profile_picture')) {
-            _image = File(data['profile_picture']);
-          }
-        });
+            _ageController.text = data['age']?.toString() ?? '';
+            _heightController.text = data['height']?.toString() ?? '';
+            _weightController.text = data['weight']?.toString() ?? '';
+            
+            if (data.containsKey('profile_picture')) {
+              _image = File(data['profile_picture']);
+            }
+          });
+        }
       }
+    } catch (e) {
+      // Handle error
+      print('Error loading user data: ${e.toString()}');
     }
-  } catch (e) {
-    // Handle error
-    print('Error loading user data: ${e.toString()}');
   }
-}
-
 
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -103,7 +102,6 @@ class _MyAccountState extends State<MyAccount> {
               ),
             ),
           ),
-
           Positioned(
             top: 100,
             left: 0,
@@ -115,7 +113,6 @@ class _MyAccountState extends State<MyAccount> {
               ),
             ),
           ),
-
           Positioned(
             top: 140,
             left: 0,
@@ -127,7 +124,6 @@ class _MyAccountState extends State<MyAccount> {
               ),
             ),
           ),
-
           // Profile Picture Circle
           Positioned(
             top: 180,
@@ -145,7 +141,6 @@ class _MyAccountState extends State<MyAccount> {
               ),
             ),
           ),
-
           Positioned(
             top: 300,
             left: 50,
@@ -158,9 +153,7 @@ class _MyAccountState extends State<MyAccount> {
                   ////////////////////////
                   InputFieldRow(
                     label: 'Goal:',
-                    
                     child: MultiSelectDialogField<String>(
-                      
                       items: goalOptions.map((String goal) {
                         return MultiSelectItem<String>(goal, goal);
                       }).toList(),
@@ -180,11 +173,8 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                       chipDisplay: MultiSelectChipDisplay.none(scroll:true),
                     ),
-                    
                   ),
-
                   const SizedBox(height: 10),
-
                   InputFieldRow(
                     label: 'Age:',
                     child: TextField(
@@ -199,9 +189,7 @@ class _MyAccountState extends State<MyAccount> {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   InputFieldRow(
                     label: 'Height:\n(in cm)',
                     child: TextField(
@@ -216,9 +204,7 @@ class _MyAccountState extends State<MyAccount> {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   InputFieldRow(
                     label: 'Weight:\n(in kg)',
                     child: TextField(
@@ -233,9 +219,7 @@ class _MyAccountState extends State<MyAccount> {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   InputFieldRow(
                     label: 'See diets for:',
                     child: MultiSelectDialogField<String>(
@@ -259,9 +243,7 @@ class _MyAccountState extends State<MyAccount> {
                       chipDisplay: MultiSelectChipDisplay.none(),
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   InputFieldRow(
                     label: 'Preferences:',
                     child: MultiSelectDialogField<String>(
@@ -285,84 +267,49 @@ class _MyAccountState extends State<MyAccount> {
                       chipDisplay: MultiSelectChipDisplay.none(),
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
-                  
-
                   Center(
-
-
-////////////////
                     child: ElevatedButton(
-                    onPressed: () async {
-                      final String ageText = _ageController.text;
-                      final String heightText = _heightController.text;
-                      final String weightText = _weightController.text;
+                      onPressed: () async {
+                        final String ageText = _ageController.text;
+                        final String heightText = _heightController.text;
+                        final String weightText = _weightController.text;
 
-                      void showSnackBar(String message) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onError,
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  message,
-                                  style: Theme.of(context).textTheme.headlineSmall,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            backgroundColor: Colors.transparent,
-                            behavior: SnackBarBehavior.floating,
-                            elevation: 0,
-                          ),
-                        );
-                      }
+                        try {
+                          final FirebaseAuth auth = FirebaseAuth.instance;
+                          final User? user = auth.currentUser;
 
-                      try {
-                        final FirebaseAuth auth = FirebaseAuth.instance;
-                        final User? user = auth.currentUser;
+                          if (user != null) {
+                            final int age = int.tryParse(ageText) ?? 0; // parses age text to int or use 0 if parsing fails
+                            final int height = int.tryParse(heightText) ?? 0;
+                            final int weight = int.tryParse(weightText) ?? 0;
 
-                        if (user != null) {
-                          final int age = int.tryParse(ageText) ?? 0; // parses age text to int or use 0 if parsing fails
-                          final int height = int.tryParse(heightText) ?? 0;
-                          final int weight = int.tryParse(weightText) ?? 0;
+                            await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+                              'goal': _selectedGoals, 
+                              'age': age,
+                              'height': height,
+                              'weight': weight,
+                              'gender': _selectedGenders,
+                              'preferences': _selectedPreferences,
+                            });
 
-                          await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
-                            'goal': _selectedGoals, 
-                            'age': age,
-                            'height': height,
-                            'weight': weight,
-                            'gender': _selectedGenders,
-                            'preferences': _selectedPreferences,
-                          
-                          });
+                            showSnackBar(context, 'Your changes have been saved.');
 
-                          showSnackBar('Your changes have been saved.');
+                            await Future.delayed(Duration(seconds: 2));
 
-                          await Future.delayed(Duration(seconds: 2));
-
-                        } else {
-                          showSnackBar('No user is logged in.');
+                          } else {
+                            showSnackBar(context, 'No user is logged in.');
+                          }
+                        } catch (e) {
+                          showSnackBar(context, 'An error occurred: ${e.toString()}');
                         }
-                      } catch (e) {
-                        showSnackBar('An error occurred: ${e.toString()}');
-                      }
-                    },
-                    child: Text('Save Changes'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.onSecondary,
-                      foregroundColor: Colors.white,
+                      },
+                      child: Text('Save Changes'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorScheme.onSecondary,
+                        foregroundColor: Colors.white,
+                      ),
                     ),
-                  ),
-      /////////
-      
-
                   ),
                 ],
               ),
@@ -374,35 +321,3 @@ class _MyAccountState extends State<MyAccount> {
   }
 }
 
-class InputFieldRow extends StatelessWidget {
-  const InputFieldRow({
-    super.key,
-    required this.label,
-    required this.child,
-  });
-
-  final String label;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.headlineLarge,
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Expanded(
-             child: child
-          )
-        ],
-      ),
-    );
-  }
-}

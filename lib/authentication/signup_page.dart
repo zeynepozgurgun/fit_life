@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_life/authentication/login_page.dart';
+import 'package:fit_life/methods/mixins.dart';
 
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends State<SignupPage> with SnackBarMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
@@ -90,38 +91,14 @@ class _SignupPageState extends State<SignupPage> {
                     final String email = _emailController.text;
                     final String password = _passwordController.text;
 
-                    void showSnackBar(String message) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onError,
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                            child: Center(
-                              child: Text(
-                                message,
-                                style: Theme.of(context).textTheme.headlineSmall,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          behavior: SnackBarBehavior.floating,
-                          elevation: 0,
-                        ),
-                      );
-                    }
-
                     final RegExp emailRegExp = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
                     if (!emailRegExp.hasMatch(email)) {
-                      showSnackBar('Please enter a valid email address.');
+                      showSnackBar(context, 'Please enter a valid email address.');
                       return;
                     }
 
                     if (password.length < 6) {
-                      showSnackBar('Password must be at least 6 characters long.');
+                      showSnackBar(context, 'Password must be at least 6 characters long.');
                       return;
                     }
 
@@ -132,7 +109,7 @@ class _SignupPageState extends State<SignupPage> {
                       );
                       User? user = userCredential.user;
 
-                      if (user != null) {  //DATA TRANSFERRED TO FIREBASE HERE
+                      if (user != null) {
                         await _firestore.collection('users').doc(user.uid).set({
                           'id': user.uid,
                           'goal': '',
@@ -144,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
                         });
                       }
 
-                      showSnackBar('Successfully created account.');
+                      showSnackBar(context, 'Successfully created account.');
 
                       await Future.delayed(Duration(seconds: 2));
 
@@ -154,9 +131,9 @@ class _SignupPageState extends State<SignupPage> {
                       );
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
-                        showSnackBar('The email address is already in use.');
+                        showSnackBar(context, 'The email address is already in use.');
                       } else {
-                        showSnackBar('An error occurred: ${e.message}');
+                        showSnackBar(context, 'An error occurred: ${e.message}');
                       }
                     }
                   },
