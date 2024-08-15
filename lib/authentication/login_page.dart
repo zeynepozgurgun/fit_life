@@ -175,13 +175,7 @@ class SlidingPanel extends StatelessWidget {
                       }
                     },
                   ),
-                  TextButton(
-                    child: Text(
-                      'Continue without an account',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    onPressed: () {},
-                  ),
+                  
                 ],
               ),
             ],
