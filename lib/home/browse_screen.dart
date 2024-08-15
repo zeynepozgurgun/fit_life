@@ -99,9 +99,10 @@ class _BrowseScreenState extends State<BrowseScreen> with DietMixin {
             SizedBox(height: 20),
             // Search bar
             TextField(
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.displaySmall,
               decoration: InputDecoration(
                 hintText: 'Search for keywords',
+                hintStyle: Theme.of(context).textTheme.displaySmall,
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),

@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_life/authentication/signup_page.dart';
 import 'package:fit_life/home/base.dart';
 
+
+
 class SlidingPanel extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;

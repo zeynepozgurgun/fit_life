@@ -103,7 +103,7 @@ class _MyAccountState extends State<MyAccount> with SnackBarMixin {
             ),
           ),
           Positioned(
-            top: 100,
+            top: 130,
             left: 0,
             right: 0,
             child: Center(
@@ -113,6 +113,7 @@ class _MyAccountState extends State<MyAccount> with SnackBarMixin {
               ),
             ),
           ),
+          /*
           Positioned(
             top: 140,
             left: 0,
@@ -123,7 +124,7 @@ class _MyAccountState extends State<MyAccount> with SnackBarMixin {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
-          ),
+          ), */
           // Profile Picture Circle
           Positioned(
             top: 180,
@@ -262,7 +263,7 @@ class _MyAccountState extends State<MyAccount> with SnackBarMixin {
                       buttonText: 
                       Text(
                         _selectedPreferences.isEmpty ? 'choose all that apply' : _selectedPreferences.join(', '),
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.displaySmall?.copyWith(overflow: TextOverflow.ellipsis),
                       ),
                       chipDisplay: MultiSelectChipDisplay.none(),
                     ),
