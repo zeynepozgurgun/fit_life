@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fit_life/data/diet.dart';
 import 'package:fit_life/home/diet_details.dart';
-import 'package:fit_life/methods/mixins.dart';
+import 'package:fit_life/methods/diet_mixin.dart';
 
 class BrowseScreen extends StatefulWidget {
   @override

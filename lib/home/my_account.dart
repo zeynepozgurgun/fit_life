@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:fit_life/data/options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_life/methods/mixins.dart';
+import 'package:fit_life/methods/snack_bar_mixin.dart';
 import 'package:fit_life/methods/classes.dart';
 
 class MyAccount extends StatefulWidget {
