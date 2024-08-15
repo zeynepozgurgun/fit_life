@@ -5,7 +5,6 @@ import 'package:fit_life/authentication/signup_page.dart';
 import 'package:fit_life/home/base.dart';
 
 
-
 class SlidingPanel extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -130,40 +129,6 @@ class SlidingPanel extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-
-class InputFieldRow extends StatelessWidget {
-  const InputFieldRow({
-    super.key,
-    required this.label,
-    required this.child,
-  });
-
-  final String label;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.headlineLarge,
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Expanded(
-             child: child
-          )
-        ],
-      ),
     );
   }
 }

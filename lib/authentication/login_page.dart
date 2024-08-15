@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_life/authentication/signup_page.dart';
 import 'package:fit_life/home/base.dart';
-import 'package:fit_life/methods/snack_bar_mixin.dart';
+import 'package:fit_life/methods/mixins/snack_bar_mixin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

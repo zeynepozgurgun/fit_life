@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fit_life/methods/user_actions_mixin.dart';
-import 'package:fit_life/methods/snack_bar_mixin.dart';
+import 'package:fit_life/methods/mixins/user_actions_mixin.dart';
+import 'package:fit_life/methods/mixins/snack_bar_mixin.dart';
 
 
 class SettingsScreen extends StatefulWidget {

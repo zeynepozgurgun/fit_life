@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fit_life/authentication/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' as FirebaseAuth;
-import 'package:fit_life/methods/snack_bar_mixin.dart';
+import 'package:fit_life/methods/mixins/snack_bar_mixin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 mixin UserActionsMixin on SnackBarMixin {
