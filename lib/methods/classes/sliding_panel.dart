@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_life/authentication/signup_page.dart';
 import 'package:fit_life/home/base.dart';
+import 'package:fit_life/globals.dart';
 
 
 class SlidingPanel extends StatelessWidget {
@@ -105,12 +106,13 @@ class SlidingPanel extends StatelessWidget {
                         );
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => BaseScreen()),
+                          MaterialPageRoute(builder: (context) => BaseScreen())
                         );
+                        isAuthenticated = true;
                       } on FirebaseAuthException catch (e) {
                         print('Failed with error code: ${e.code}');
                         print(e.message);
-
+                        isAuthenticated = false;
                         // LOGIN FAILURE
                         showSnackBar('Wrong credentials. Try again or sign up if you don\'t have an account.');
                       }
@@ -121,7 +123,13 @@ class SlidingPanel extends StatelessWidget {
                       'Continue without an account',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      isAuthenticated = false;
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => BaseScreen()),
+                        );
+                    },
                   ),
                 ],
               ),

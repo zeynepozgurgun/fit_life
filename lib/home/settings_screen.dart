@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fit_life/methods/mixins/user_actions_mixin.dart';
 import 'package:fit_life/methods/mixins/snack_bar_mixin.dart';
+import 'package:fit_life/globals.dart';
 
 
 class SettingsScreen extends StatefulWidget {
@@ -62,6 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SnackBarMixin, Use
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   onTap: () {
+                    isAuthenticated = false;
                     showWarning(context);
                   },
                 ),

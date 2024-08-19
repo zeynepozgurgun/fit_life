@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fit_life/data/diet.dart';
 import 'package:fit_life/home/diet_details.dart';
 import 'package:fit_life/methods/mixins/diet_mixin.dart';
+import 'package:fit_life/globals.dart';
 
 class BrowseScreen extends StatefulWidget {
   @override
@@ -54,7 +55,12 @@ class _BrowseScreenState extends State<BrowseScreen> with DietMixin {
                       onTap: () {
                         setState(() {
                           isForYouSelected = true;
-                          _loadDiets();
+                          if (isAuthenticated){
+                            _loadDiets();
+                          }
+                          else{
+                            _diets = Future.value([]);
+                          }
                         });
                       },
                       child: Container(
@@ -126,7 +132,13 @@ class _BrowseScreenState extends State<BrowseScreen> with DietMixin {
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(child: Text('No diets found'));
+                    if (isAuthenticated){
+                      return Center(child: Text('No diets found'));
+                    }
+                    else{
+                      return Center(child: Text('Log in to see personalized diets!'));
+                    }
+                    
                   } else {
                     return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
