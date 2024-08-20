@@ -3,6 +3,8 @@ import 'navigation_bar.dart';
 import 'settings_screen.dart';
 import 'browse_screen.dart';
 import 'my_account.dart';
+import 'without_account.dart';
+import 'package:fit_life/globals.dart';
 
 class BaseScreen extends StatefulWidget { //sstateful because it needs to remember which screen is currently active
   @override
@@ -16,11 +18,13 @@ class _BaseScreenState extends State<BaseScreen> { //it ties this state to the B
 
   final PageController _pageController = PageController();
 
-  final List<Widget> _screens = [
-    MyAccount(),
-    BrowseScreen(),
-    SettingsScreen(),
-  ];
+List<Widget> get _screens {
+    return [
+      isAuthenticated ? MyAccount() : NoAccountScreen(),
+      BrowseScreen(),
+      isAuthenticated ? SettingsScreen() : NoAccountScreen(),
+    ];
+  }
 
   void _onTabTapped(int index) {
     setState(() {

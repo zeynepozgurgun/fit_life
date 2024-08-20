@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_life/authentication/login_page.dart';
+import 'package:fit_life/methods/mixins/snack_bar_mixin.dart';
 
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends State<SignupPage> with SnackBarMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -40,7 +43,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Email:',  
+                'Email:',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 20),
@@ -51,7 +54,7 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
-                  controller: _emailController,  
+                  controller: _emailController,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12.0),
@@ -72,7 +75,7 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: TextField(
-                  controller: _passwordController,  
+                  controller: _passwordController,
                   obscureText: true,
                   style: Theme.of(context).textTheme.headlineSmall,
                   decoration: const InputDecoration(
@@ -82,45 +85,20 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               SizedBox(height: 20),
-              Center( 
+              Center(
                 child: ElevatedButton(
                   onPressed: () async {
                     final String email = _emailController.text;
                     final String password = _passwordController.text;
 
-                    void showSnackBar(String message) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onError,
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                            child: Center(
-                              child: Text(
-                                message,
-                                style: Theme.of(context).textTheme.headlineSmall,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          behavior: SnackBarBehavior.floating,
-                          elevation: 0,
-                        ),
-                      );
-                    }
-
                     final RegExp emailRegExp = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
                     if (!emailRegExp.hasMatch(email)) {
-                      showSnackBar('Please enter a valid email address.');
+                      showSnackBar(context, 'Please enter a valid email address.');
                       return;
                     }
 
-      
                     if (password.length < 6) {
-                      showSnackBar('Password must be at least 6 characters long.');
+                      showSnackBar(context, 'Password must be at least 6 characters long.');
                       return;
                     }
 
@@ -129,9 +107,22 @@ class _SignupPageState extends State<SignupPage> {
                         email: email,
                         password: password,
                       );
-                      showSnackBar('Successfully created account.');
+                      User? user = userCredential.user;
 
-                    
+                      if (user != null) {
+                        await _firestore.collection('users').doc(user.uid).set({
+                          'id': user.uid,
+                          'goal': '',
+                          'age': 0,
+                          'height': 0.0,
+                          'weight': 0.0,
+                          'gender': '',
+                          'preferences': '',
+                        });
+                      }
+
+                      showSnackBar(context, 'Successfully created account.');
+
                       await Future.delayed(Duration(seconds: 2));
 
                       Navigator.pushReplacement(
@@ -140,9 +131,9 @@ class _SignupPageState extends State<SignupPage> {
                       );
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
-                        showSnackBar('The email address is already in use.');
+                        showSnackBar(context, 'The email address is already in use.');
                       } else {
-                        showSnackBar('An error occurred: ${e.message}');
+                        showSnackBar(context, 'An error occurred: ${e.message}');
                       }
                     }
                   },
