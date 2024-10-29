@@ -1,8 +1,8 @@
 ## FITLIFE - Personalized Diet Recommendation App
 ## Project Overview
 FIT-LIFE is a mobile application designed to offer personalized diet recommendations based on user input, such as age, weight, height, goals, and dietary preferences. The app aims to make tailored dietary advice more accessible by suggesting diets that best fit individual needs. <br/>
-< br / >
-The project was developed with a focus on user-friendliness, security, and functionality. This README provides an overview of the app’s key features, setup instructions, and project structure to guide collaborators, users, and future contributors. < br / >
+<br/>
+The project was developed with a focus on user-friendliness, security, and functionality. This README provides an overview of the app’s key features, setup instructions, and project structure to guide collaborators, users, and future contributors. <br/>
 
 ## Features
 User Authentication: Secure login and registration using Firebase Authentication. < br / >
