@@ -58,8 +58,8 @@ Technical Skills: Developing cross-platform mobile apps with Flutter, using Fire
 Professional Skills: Improved time management, communication with team members, and problem-solving in a real-world development environment.
 
 ## Contributors
-[Zeynep Özgür Gün] - Full-stack development, design, and project coordination.
-[Şule Merve Atalay] - Initial project ideation and early development support.
+[Zeynep Özgür Gün] - Full-stack development, design, and project coordination.\n
+[Şule Merve Atalay] - Initial project ideation and early development support. \n
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
