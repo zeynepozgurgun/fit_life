@@ -37,10 +37,7 @@ git clone https://github.com/username/FITLIFE.git
 Install dependencies with:
 flutter pub get
 
-Set up Firebase with:
-- Follow Firebase setup for iOS and Android in the Firebase Console.
-- Place google-services.json (Android) and GoogleService-Info.plist (iOS) files in the respective directories.
-Run the app:
+Set up Firebase for iOS and Android in the Firebase Console. Then place google-services.json (Android) and GoogleService-Info.plist (iOS) files in the respective directories. Run the app with:
 flutter run
 
 ## Usage
