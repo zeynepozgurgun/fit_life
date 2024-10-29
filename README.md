@@ -56,7 +56,8 @@ This project provided experience in:
 
 Technical Skills: Developing cross-platform mobile apps with Flutter, using Firebase for backend functions, and collaborative version control with GitHub.
 Professional Skills: Improved time management, communication with team members, and problem-solving in a real-world development environment.
-Contributors
+
+## Contributors
 [Zeynep Özgür Gün] - Full-stack development, design, and project coordination.
 [Şule Merve Atalay] - Initial project ideation and early development support.
 
